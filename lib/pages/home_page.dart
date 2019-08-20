@@ -33,6 +33,8 @@ class _HomePageState extends State<HomePage> {
             List<Map> swiperDataList = (data['data']['slides'] as List).cast(); // 顶部轮播组件数
             List<Map> navigatorList =(data['data']['category'] as List).cast(); //类别列表
             String  advertesPicture = data['data']['advertesPicture']['PICTURE_ADDRESS']; //广告图片
+            String  leaderImage= data['data']['shopInfo']['leaderImage'];  //店长图片
+            String  leaderPhone = data['data']['shopInfo']['leaderPhone']; //店长电话
 
             if(navigatorList.length>10){
                 navigatorList.removeRange(10, navigatorList.length);
@@ -42,7 +44,8 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 SwiperDiy(swiperDataList:swiperDataList), //轮播组件
                 TopNavigator(navigatorList:navigatorList),  //导航组件
-                AdBanner(advertesPicture:advertesPicture),
+                AdBanner(advertesPicture:advertesPicture),  //广告组件
+                LeaderPhone(leaderImage:leaderImage,leaderPhone:leaderPhone) 
               ],
             );
 
@@ -97,8 +100,6 @@ class SwiperDiy extends StatelessWidget{
 
 }
 
-
-
 //GirdView 类别导航功能
 class TopNavigator  extends StatelessWidget{
 
@@ -142,11 +143,7 @@ class TopNavigator  extends StatelessWidget{
     );
   }
 
-
-
-
 }
-
 
 //Ad 广告功能的实现
 class AdBanner extends StatelessWidget{
@@ -165,6 +162,30 @@ class AdBanner extends StatelessWidget{
     );
   }
 
+
+
+}
+
+class LeaderPhone extends StatelessWidget{
+
+  final String leaderImage; //店长图片
+  final String leaderPhone; //店长电话
+
+  LeaderPhone({Key key,this.leaderImage, this.leaderPhone}):super(key:key);
+
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Container(
+      child: InkWell(
+        onTap: (){},
+        child: Image.network(leaderImage),
+      ),
+    );
+  }
 
 
 }
