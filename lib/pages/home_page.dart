@@ -31,11 +31,13 @@ class _HomePageState extends State<HomePage> {
 
             var data=json.decode(snapshot.data.toString());
             List<Map> swiperDataList = (data['data']['slides'] as List).cast(); // 顶部轮播组件数
+            List<Map> navigatorList =(data['data']['category'] as List).cast(); //类别列表
 
 
             return Column(
               children: <Widget>[
-                SwiperDiy(swiperDataList:swiperDataList),
+                SwiperDiy(swiperDataList:swiperDataList), //轮播组件
+                TopNavigator(navigatorList:navigatorList),  //导航组件
               ],
             );
 
@@ -53,6 +55,7 @@ class _HomePageState extends State<HomePage> {
 }
 
 
+// 顶部轮播图
 class SwiperDiy extends StatelessWidget{
 
   final List swiperDataList;
@@ -80,6 +83,55 @@ class SwiperDiy extends StatelessWidget{
 
 
       ),
+
+    );
+  }
+
+
+
+
+}
+
+class TopNavigator  extends StatelessWidget{
+
+   final List navigatorList;
+
+   TopNavigator({Key key, this.navigatorList}) : super(key: key);
+
+
+
+   Widget _gridViewItemUI(BuildContext buildContext,item){
+
+
+     return InkWell(
+
+       onTap: (){print('点击了导航');},
+       child: Column(
+         children: <Widget>[
+           Image.network(item['image'],width:ScreenUtil().setWidth(95)),
+           Text(item['mallCategoryName'])
+         ],
+       ),
+
+     );
+
+   }
+
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Container(
+
+      height: ScreenUtil().setHeight(320),
+      padding: EdgeInsets.all(3.0),
+      child: GridView.count(
+          crossAxisCount: 5,
+          padding: EdgeInsets.all(4.0),
+          children: navigatorList.map((item){
+            return _gridViewItemUI(context,item);
+          }).toList(),
+      )
 
     );
   }
