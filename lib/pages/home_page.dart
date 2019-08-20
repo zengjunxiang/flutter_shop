@@ -33,6 +33,9 @@ class _HomePageState extends State<HomePage> {
             List<Map> swiperDataList = (data['data']['slides'] as List).cast(); // 顶部轮播组件数
             List<Map> navigatorList =(data['data']['category'] as List).cast(); //类别列表
 
+            if(navigatorList.length>10){
+                navigatorList.removeRange(10, navigatorList.length);
+            }
 
             return Column(
               children: <Widget>[
@@ -92,6 +95,9 @@ class SwiperDiy extends StatelessWidget{
 
 }
 
+
+
+//GirdView 类别导航功能
 class TopNavigator  extends StatelessWidget{
 
    final List navigatorList;
