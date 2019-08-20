@@ -5,18 +5,19 @@ import '../config/httpHeaders.dart';
 import '../config/service_url.dart';
 import '../service/service_method.dart';
 import 'dart:convert';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomePage extends StatefulWidget{
-
     _HomePageState createState() => _HomePageState();
 }
 
-
 class _HomePageState extends State<HomePage> {
 
-
   Widget build(BuildContext context) {
+
+
     return Scaffold(
+
       appBar: AppBar(
         title: Text('百姓生活+'),
       ),
@@ -40,16 +41,12 @@ class _HomePageState extends State<HomePage> {
 
 
           }else{
-
             return Center (
-
               child: Text('加载中'),
             );
           }
-
         },
       ),
-
     );
   }
 
@@ -65,8 +62,12 @@ class SwiperDiy extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+
+    ScreenUtil.instance = ScreenUtil(width: 750,height: 1334)..init(context);
+
     return Container(
-       height: 200.0,
+       height: ScreenUtil().setHeight(333),
+       width: ScreenUtil().setWidth(750),
       child: Swiper(
 
           itemBuilder: ( BuildContext context,int index){
