@@ -18,6 +18,9 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
   int page = 1;
   List<Map> hotGoodsList=[];
 
+  GlobalKey<RefreshFooterState> _footerKey = new GlobalKey<RefreshFooterState>();
+  GlobalKey<RefreshHeaderState> _easyRefreshKey =new GlobalKey<RefreshHeaderState>();
+
 
   //火爆商品接口
   void _getHotGoods(){
@@ -42,6 +45,8 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
 
       appBar: AppBar(
         title: Text('百姓生活+'),
+        centerTitle: true,
+        backgroundColor: Color.fromRGBO(255, 255, 255, 1.0),
       ),
 
       body: FutureBuilder(
@@ -100,7 +105,7 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
                  SwiperDiy(swiperDataList:swiperDataList), //轮播组件
                   TopNavigator(navigatorList:navigatorList),  //导航组件
                   AdBanner(advertesPicture:advertesPicture),  //广告组件
-                  LeaderPhone(leaderImage:leaderImage,leaderPhone:leaderPhone),  //拨打电话组件
+                 LeaderPhone(leaderImage:leaderImage,leaderPhone:leaderPhone),  //拨打电话组件
                   Recommend(recommendList:recommendList),  // 商品推荐组件
 
                    FloorTitle(picture_address:floor1Title),
@@ -129,8 +134,34 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
 
                });
 
-
              },
+
+             refreshFooter: ClassicsFooter(
+                 key:_footerKey,
+                 bgColor:Colors.white,
+                 textColor: Colors.pink,
+                 moreInfoColor: Colors.pink,
+                 showMore: true,
+                 noMoreText: '',
+                 moreInfo: '加载中',
+                 loadReadyText:'上拉加载....'
+             ),
+
+             refreshHeader: ClassicsHeader(
+               key: _easyRefreshKey ,
+               bgColor:Colors.white,
+               textColor: Colors.lightBlueAccent,
+               moreInfoColor: Colors.lightBlueAccent,
+               showMore: true,
+               refreshingText: '正在刷新',
+               refreshReadyText: '开始加载',
+               refreshedText: '完成加载',
+               refreshText: '加载中',
+
+
+
+             ),
+
 
            );
 
