@@ -50,7 +50,7 @@ import '../config/service_url.dart';
    }
 
    //通用网络请求
-   Future  request(url,formData) async {
+   Future  request(url,{formData}) async {
 
      try{
        print('开始获取数据...............');

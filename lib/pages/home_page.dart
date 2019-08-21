@@ -7,6 +7,7 @@ import '../service/service_method.dart';
 import 'dart:convert';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 class HomePage extends StatefulWidget{
     _HomePageState createState() => _HomePageState();
@@ -17,6 +18,22 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
   int page = 1;
   List<Map> hotGoodsList=[];
 
+
+  //火爆商品接口
+  void _getHotGoods(){
+    var formPage={'page': page};
+    request('homePageBelowConten',formData:formPage).then((val){
+
+      var data=json.decode(val.toString());
+      List<Map> newGoodsList = (data['data'] as List ).cast();
+      setState(() {
+        hotGoodsList.addAll(newGoodsList);
+        page++;
+      });
+
+
+    });
+  }
 
   Widget build(BuildContext context) {
 
@@ -53,10 +70,34 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
                 navigatorList.removeRange(10, navigatorList.length);
             }
 
-            return SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  SwiperDiy(swiperDataList:swiperDataList), //轮播组件
+//            return SingleChildScrollView(
+//              child: Column(
+//                children: <Widget>[
+//                  SwiperDiy(swiperDataList:swiperDataList), //轮播组件
+//                  TopNavigator(navigatorList:navigatorList),  //导航组件
+//                  AdBanner(advertesPicture:advertesPicture),  //广告组件
+//                  LeaderPhone(leaderImage:leaderImage,leaderPhone:leaderPhone),  //拨打电话组件
+//                  Recommend(recommendList:recommendList),  // 商品推荐组件
+//
+//                   FloorTitle(picture_address:floor1Title),
+//                   FloorContent(floorGoodsList:floor1),
+//                   FloorTitle(picture_address:floor2Title),
+//                  FloorContent(floorGoodsList:floor2),
+//                  FloorTitle(picture_address:floor3Title),
+//                  FloorContent(floorGoodsList:floor3),
+//                  _hotGoods()
+//
+//
+//
+//                ],
+//              ),
+//            );
+
+           return EasyRefresh(
+             child: ListView(
+               children: <Widget>[
+
+                 SwiperDiy(swiperDataList:swiperDataList), //轮播组件
                   TopNavigator(navigatorList:navigatorList),  //导航组件
                   AdBanner(advertesPicture:advertesPicture),  //广告组件
                   LeaderPhone(leaderImage:leaderImage,leaderPhone:leaderPhone),  //拨打电话组件
@@ -70,11 +111,28 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
                   FloorContent(floorGoodsList:floor3),
                   _hotGoods()
 
+               ],
+             ),
+
+             onRefresh: ()async{
+               print('开始加载更多');
+               var formPage={'page': page};
+
+               await request('homePageBelowConten',formData: formPage).then((val){
+                 var data=json.decode(val.toString());
+                 List<Map> newGoodsList = (data['data'] as List ).cast();
+                 setState(() {
+                   hotGoodsList.addAll(newGoodsList);
+                   page++;
+
+                 });
+
+               });
 
 
-                ],
-              ),
-            );
+             },
+
+           );
 
 
           }else{
@@ -92,7 +150,8 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
   void initState() {
     // TODO: implement initState
     print("执行 initState 方法");
-    getHomePageBeloConten();
+   // getHomePageBeloConten();
+  //   _getHotGoods();
     super.initState();
   }
 
