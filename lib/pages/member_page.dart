@@ -9,14 +9,15 @@ class MemberPage extends StatelessWidget {
     // TODO: implement build
     return Scaffold(
 
-      appBar: new AppBar(
-        title: new Text('会员中心'),
+      appBar: AppBar(
+        title: Text('会员中心'),
       ),
 
       body: ListView(
         children: <Widget>[
 
           _topHeader(),
+          _orderTitle(),
 
         ],
       ),
@@ -25,6 +26,7 @@ class MemberPage extends StatelessWidget {
   }
 
 
+  //顶部头像区域
   Widget _topHeader(){
 
     return Container(
@@ -43,7 +45,7 @@ class MemberPage extends StatelessWidget {
          margin: EdgeInsets.only(top: 20),
          child: new Text('胖兄',
          style: new TextStyle(
-           fontSize: ScreenUtil().setSp(48),
+           fontSize: ScreenUtil().setSp(24),
            color: Colors.grey,
          ),),
        )
@@ -51,6 +53,28 @@ class MemberPage extends StatelessWidget {
       ),
     );
   }
+
+
+  //我的订单区域
+  Widget _orderTitle(){
+
+    return Container(
+      margin: EdgeInsets.only(top:10),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border(
+              bottom:BorderSide(width: 1,color:Colors.black12)
+          )
+      ),
+      child: ListTile(
+        leading: Icon(Icons.list),
+        title:Text('我的订单'),
+        trailing: Icon(Icons.arrow_right),
+      ),
+    );
+
+  }
+
 
 
 }
