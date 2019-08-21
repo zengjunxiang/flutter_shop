@@ -39,7 +39,7 @@ class _IndexPageState extends State<IndexPage>{
 
 
 
- final List  tabBodies = [
+ final List<Widget>  tabBodies = [
    HomePage(),
    CategoryPage(),
    CartPage(),
@@ -50,10 +50,22 @@ class _IndexPageState extends State<IndexPage>{
  int currentIndex= 0;
  var currentPage ;
 
+   PageController _pageController;
+
  @override
   void initState() {
     // TODO: implement initState
    currentPage = tabBodies[currentIndex];
+
+   _pageController = new PageController()
+    ..addListener((){
+      if(currentPage != _pageController.page.round()){
+        setState((){
+          currentPage != _pageController.page.round();
+        });
+
+      }
+    });
     super.initState();
   }
 
@@ -61,8 +73,6 @@ class _IndexPageState extends State<IndexPage>{
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-
-
 
       backgroundColor: Color.fromRGBO(244, 245, 245, 1.0),
       bottomNavigationBar: BottomNavigationBar(
@@ -77,7 +87,11 @@ class _IndexPageState extends State<IndexPage>{
         },
       ),
 
-      body: currentPage,
+     // body: currentPage,
+      body: IndexedStack(
+        index: currentIndex,
+        children: tabBodies,
+      ),
     );
   }
 

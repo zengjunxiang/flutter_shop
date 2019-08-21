@@ -12,7 +12,7 @@ class HomePage extends StatefulWidget{
     _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin {
 
   Widget build(BuildContext context) {
 
@@ -48,8 +48,9 @@ class _HomePageState extends State<HomePage> {
                   SwiperDiy(swiperDataList:swiperDataList), //轮播组件
                   TopNavigator(navigatorList:navigatorList),  //导航组件
                   AdBanner(advertesPicture:advertesPicture),  //广告组件
-                  LeaderPhone(leaderImage:leaderImage,leaderPhone:leaderPhone),
-                  Recommend(recommendList:recommendList),
+                  LeaderPhone(leaderImage:leaderImage,leaderPhone:leaderPhone),  //拨打电话组件
+                  Recommend(recommendList:recommendList),  // 商品推荐组件
+
                 ],
               ),
             );
@@ -65,7 +66,25 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    print("执行 initState 方法");
+    super.initState();
+  }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
+
+
+
+
 }
+
+
+
 
 
 // 顶部轮播图
