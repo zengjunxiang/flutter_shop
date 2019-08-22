@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
         backgroundColor: Color.fromRGBO(255, 255, 255, 1.0),
       ),
 
-      body: FutureBuilder(
+       body: FutureBuilder(
 
         future: getHomePageContent(),
         builder: (context,snapshot){
@@ -75,28 +75,6 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
                 navigatorList.removeRange(10, navigatorList.length);
             }
 
-//            return SingleChildScrollView(
-//              child: Column(
-//                children: <Widget>[
-//                  SwiperDiy(swiperDataList:swiperDataList), //轮播组件
-//                  TopNavigator(navigatorList:navigatorList),  //导航组件
-//                  AdBanner(advertesPicture:advertesPicture),  //广告组件
-//                  LeaderPhone(leaderImage:leaderImage,leaderPhone:leaderPhone),  //拨打电话组件
-//                  Recommend(recommendList:recommendList),  // 商品推荐组件
-//
-//                   FloorTitle(picture_address:floor1Title),
-//                   FloorContent(floorGoodsList:floor1),
-//                   FloorTitle(picture_address:floor2Title),
-//                  FloorContent(floorGoodsList:floor2),
-//                  FloorTitle(picture_address:floor3Title),
-//                  FloorContent(floorGoodsList:floor3),
-//                  _hotGoods()
-//
-//
-//
-//                ],
-//              ),
-//            );
 
            return EasyRefresh(
              child: ListView(
@@ -105,7 +83,7 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
                  SwiperDiy(swiperDataList:swiperDataList), //轮播组件
                   TopNavigator(navigatorList:navigatorList),  //导航组件
                   AdBanner(advertesPicture:advertesPicture),  //广告组件
-                 LeaderPhone(leaderImage:leaderImage,leaderPhone:leaderPhone),  //拨打电话组件
+                  LeaderPhone(leaderImage:leaderImage,leaderPhone:leaderPhone),  //拨打电话组件
                   Recommend(recommendList:recommendList),  // 商品推荐组件
 
                    FloorTitle(picture_address:floor1Title),
@@ -189,8 +167,6 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
-
-
 
   //火爆专区标题
   Widget hotTitle= Container(
@@ -276,7 +252,6 @@ class _HomePageState extends State<HomePage>  with AutomaticKeepAliveClientMixin
   }
 
 }
-
 
 // 顶部轮播图
 class SwiperDiy extends StatelessWidget{
