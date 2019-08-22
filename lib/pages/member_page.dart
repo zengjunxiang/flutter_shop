@@ -6,8 +6,12 @@ class MemberPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    ScreenUtil.instance = ScreenUtil(width: 750,height: 1334)..init(context);
+
     // TODO: implement build
     return Scaffold(
+
 
       appBar: AppBar(
         title: Text('会员中心'),
@@ -103,7 +107,7 @@ class MemberPage extends StatelessWidget {
           ),
           //-----------------
           Container(
-            width: ScreenUtil().setWidth(187),
+
             child: Column(
               children: <Widget>[
                 Icon(
