@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provide/provide.dart';
+import '../provide/counter.dart';
 
 class MemberPage extends StatelessWidget {
 
@@ -15,6 +17,8 @@ class MemberPage extends StatelessWidget {
 
       appBar: AppBar(
         title: Text('会员中心'),
+        centerTitle: true,
+        backgroundColor: Color.fromRGBO(255, 255, 255, 1.0),
       ),
 
       body: ListView(
@@ -49,11 +53,15 @@ class MemberPage extends StatelessWidget {
 
        Container(
          margin: EdgeInsets.only(top: 20),
-         child: new Text('胖兄',
-         style: new TextStyle(
-           fontSize: ScreenUtil().setSp(48),
-           color: Colors.grey,
-         ),),
+         child: Provide<Counter>(
+
+           builder: (context,child,counter){
+             return Text(
+               '胖兄${counter.value}',
+               style: Theme.of(context).textTheme.display1,
+             );
+           },
+         ),
        )
         ],
       ),

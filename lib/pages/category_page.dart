@@ -24,6 +24,8 @@ class _CategoryPageState extends State {
     return Scaffold(
       appBar: AppBar(
         title: Text('商品分类'),
+        centerTitle: true,
+        backgroundColor: Color.fromRGBO(255, 255, 255, 1.0),
       ),
       body: Container(
         child: Row(
